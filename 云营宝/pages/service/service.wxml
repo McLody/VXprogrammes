@@ -1,0 +1,50 @@
+<scroll-view scroll-y class="bg-white">
+  <image src="/image/title.png" style="width:100%;height=800rpx;top:0"></image>
+  <view class="cu-bar justify-center bg-white">
+    <view class="action sub-title">
+      <text class="text-xl text-bold text-brown" style="height:1rpx;">淘小铺简介</text>
+      <text class="text-ABC text-brown">introduction</text>
+    </view>
+  </view>
+  <view class="padding-lr padding-bottom text-left">
+    <view class="padding-xl radius shadow-warp bg-white margin-top line-content" style="line-height:25px">
+      <text class="text-black" style="line-height:5rpx" decode="{{true}}">&emsp;&emsp;淘小铺是阿里巴巴集团继淘宝、天猫之后的第三个电商平台，立足于阿里信用及流量体系，帮助个体商家开展社交电商，分享赚钱随时提现，目前仍处于初始阶段及</text>
+      <text class="text-bold text-black" style="line-height:5rpx">红利期。</text>
+    </view>
+  </view>
+  <view class="cu-bar justify-center bg-white">
+    <view class="action sub-title">
+      <text class="text-xl text-bold text-brown" style="height:1rpx;">服务介绍</text>
+      <text class="text-ABC text-brown">survice</text>
+    </view>
+  </view>
+  <view class="padding-lr padding-bottom text-left">
+    <view class="padding-xl radius shadow-warp bg-white margin-top line-content" style="line-height:25px">
+      <text class="text-black" style="line-height:5rpx" decode="{{true}}">&emsp;&emsp;云营科技携手阿里巴巴淘小铺打造实体经济新零售模式，让您以</text>
+      <text class="text-bold text-black" style="line-height:5rpx">极低的成本开展合作</text>
+      <text class="text-black" style="line-height:5rpx" decode="{{true}}">，获得云营科技企业级的运营指导和流量变现方案。</text>
+    </view>
+  </view>
+  <view class="cu-bar justify-center bg-white">
+    <view class="action sub-title">
+      <text class="text-xl text-bold text-brown" style="height:1rpx;">操作步骤</text>
+      <text class="text-ABC text-brown">procedure</text>
+    </view>
+  </view>
+  <view class="padding-lr padding-bottom text-left">
+    <view class="padding-xl radius shadow-warp bg-white margin-top line-content" style="line-height:25px">
+      <image src="/image/操作过程.png" class="radius" style="width:100%;height:670rpx;margin-top:20rpx"></image>
+    </view>
+  </view>
+  <view class="cu-bar justify-center bg-white">
+    <view class="action sub-title">
+      <text class="text-xl text-bold text-brown" style="height:1rpx;">获利流程</text>
+      <text class="text-ABC text-brown">procedure</text>
+    </view>
+  </view>
+  <view class="padding-lr padding-bottom text-left">
+    <view class="padding-xl radius shadow-warp bg-white margin-top line-content" style="line-height:25px">
+      <image src="/image/获利流程.png" class="radius" style="width:100%;height:670rpx;margin-top:20rpx"></image>
+    </view>
+  </view>
+</scroll-view>

@@ -32,6 +32,9 @@ App({
         }
       }
     })
+    wx.cloud.init({
+      env:"yunyingbao-vdu18"
+    })
   },
   globalData: {
     userInfo: null

@@ -1,0 +1,120 @@
+<view class='cu-custom'>
+  <view class="cu-bar fixed bg-shadeTop" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class='content' style='top:{{StatusBar}}px;'>商品列表</view>
+  </view>
+</view>
+<swiper class="screen-swiper round-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+  <swiper-item wx:for="{{4}}" wx:key>
+    <image src="https://image.weilanwl.com/img/4x3-{{index+1}}.jpg" mode='aspectFill'></image>
+  </swiper-item>
+</swiper>
+<view class="VerticalBox">
+  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 375rpx)">
+    <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{list}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+      {{item.name}}
+    </view>
+  </scroll-view>
+  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 375rpx)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+    <view class="padding-top padding-lr" wx:for="{{list}}" wx:key id="main-{{index}}">
+      <view class='cu-bar solid-bottom bg-white'>
+        <view class='action'>
+          <text class='cuIcon-title text-green'></text> {{item.name}} </view>
+      </view>
+    <view class="cu-list menu-avatar" wx:for="{{item.goods}}" wx:key="{{id}}">
+      <view class="cu-item">
+          <view class="cu-avatar radius xl" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big81007.jpg);"></view>
+          <view class="content">
+            <view>
+              <text class="text-cut">{{item.name}}</text>
+              <view class="cu-tag round bg-orange sm {{item.status==''?'visibilityHidden':''}}">{{item.status}}</view>
+            </view>
+            <view class="text-gray text-sm flex">
+              <text class="text-cut"> {{item.detail}}</text>
+            </view>
+          </view>
+          <view class="action">
+            <view class="text-red text-lg">￥{{item.price}}</view> 
+            <button class="cu-btn round bg-green shadow sm" bindtap="showModal" id="{{item.id}}" data-index="{{index}}"  data-list_index="{{item.list_index}}" data-name="{{item.name}}" data-detail="{{item.detail}}" data-target="bottomModal" data-price="{{item.price}}">选择</button>
+          </view>
+      </view>
+    </view>
+    </view>
+  </scroll-view>
+</view>
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white row">
+      <view class="action text-blue" bindtap="hideModal"style="font-size:30rpx;margin-right:30rpx;">清空/取消</view>
+      <view class="action text-green" bindtap="addtoCart" style="font-size:30rpx;margin-right:30rpx;">加入购物车/继续</view>
+    </view>
+    <view style="height:200rpx;background:#fff">
+      <view class="Bottom">
+        <view class="cu-avatar xxxl image" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big81007.jpg);"></view>
+          <view style="text-align:left">
+            <text class="text-cut text-xl padding-sm" style="font-weight:20rpx">{{name_Bottom}}</text>
+            <view class="text-gray text-df padding-left-sm">
+              <text class="text-cut"> {{detail_Bottom}}</text>
+            </view>
+          </view>
+            <view class="buy">
+               <view class="text-red text-lg" style="position:absolute;right:0;bottom:100rpx;">￥{{price_Bottom_Total}}</view>
+               <view style="display:flex; align-items: center; justify-content: center;">
+                 <view class="text-cut text-sm padding-sm text-gray">您想要购买的数量:</view>
+                 <view class="stepper">   
+                  <text class="sign {{num <= 1 ? 'disabled' : 'normal'}}" bindtap="delCount" data-index="{{index}}">-</text>  
+                   <input class="number" type="number" bindchange="bindManual" value="{{list[list_index].goods[goods_index].count}}"  disabled="disabled"/>  
+                   <text class="sign {{num >= 100 ? 'disabled' : 'normal'}}" bindtap="addCount" data-index="{{index}}">+</text>  
+                 </view>  
+               </view>
+            </view>
+          </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalNameCart=='Modal'?'show':''}}" style="bottom:100rpx;">
+  <view class="cu-dialog" style="border-radius:40rpx;">
+    <view class="cu-bar bg-orange justify-end" style="height:80rpx;">
+      <view class="content">购物车</view>
+      <view class="action" bindtap="hideModalCart">
+        <text class="cuIcon-close text-white"></text>
+      </view>
+    </view>
+      <view class="padding-xl" style="display:{{price_Total==0?'':'none'}}">
+      你还没有选择产品哦~
+      </view>
+      <view wx:for="{{list}}">
+      <view wx:for="{{item.goods}}" wx:if="{{item.count!=0}}"style="height:190rpx;background:#fff;border-bottom:2rpx solid #ccc">
+      <view class="Cart" style="padding-top:30rpx;">
+        <view class="cu-avatar xl image" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big81007.jpg);border-radius:10rpx;"></view>
+          <view style="text-align:left;height:128rpx;">
+            <text class="text-cut text-xl" style="font-weight:20rpx;padding-top:10rpx;margin-left:10px">{{item.name}}</text>
+            <view class="text-red text-xl" style="position:absolute;bottom:0px;padding:0px;margin-left:8px ">￥{{item.tprice}}</view>
+          </view>
+                 <view class="stepper" style="position:absolute;top:70rpx;right:60rpx;">   
+                  <text class="sign {{num <= 1 ? 'disabled' : 'normal'}}" bindtap="delCountCart" data-goods_index="{{index}}" data-list_index="{{item.list_index}}">-</text>  
+                   <input class="number" type="number" bindchange="bindManual" value="{{item.count}}"  disabled="disabled"/>  
+                   <text class="sign {{num >= 100 ? 'disabled' : 'normal'}}" bindtap="addCountCart" data-goods_index="{{index}}"  data-list_index="{{item.list_index}}">+</text>  
+                 </view>  
+          </view>
+    </view>
+    </view>
+  </view>
+</view>
+ <view class="cu-bar bg-white tabbar border shop foot">
+    <button class="action" open-type="contact">
+      <view class="cuIcon-service text-green">
+      </view>
+      客服
+    </button>
+    <view class="action" bindtap="showModalCart"data-target="Modal">
+      <view class="cuIcon-cart">
+        <view class="cu-tag badge {{count_Total==0?'visibilityHidden':''}}">{{count_Total}}</view>
+      </view>
+      购物车
+    </view>
+    <view class="submit">
+      <view class="text-gray">总价：</view>
+      <view class="text-red text-lg">￥{{price_Total}}</view>
+    </view>  
+    <view class="bg-{{price_Total==0?'grey':'orange'}} submit">去结算</view>
+</view>
